@@ -12,16 +12,6 @@ RUN apt-get install -y curl
 RUN rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-#
-# The sudo workaround
-#
-#COPY docker.sh /usr/bin/docker
-RUN chmod +x /usr/bin/docker
-
-# Install docker-compose
-RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-RUN chmod +x /usr/local/bin/docker-compose
-
 
 # Time zone
 RUN echo "Australia/Sydney" > /etc/timezone \
