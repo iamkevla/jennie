@@ -17,7 +17,17 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 RUN echo "Australia/Sydney" > /etc/timezone \
  && dpkg-reconfigure --frontend=noninteractive tzdata
  
- 
+# Install docker-engine
+# According to Petazzoni's article:
+# ---------------------------------
+# "Former versions of this post advised to bind-mount the docker binary from
+# the host to the container. This is not reliable anymore, because the Docker
+# Engine is no longer distributed as (almost) static libraries."
+RUN curl -sSL https://get.docker.com/ | sh
+
+# Make sure jenkins user has docker privileges
+RUN usermod -aG docker jenkins 
+
 #
 # supervisord
 #
