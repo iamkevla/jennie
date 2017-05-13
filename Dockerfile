@@ -43,8 +43,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Start supervisord when running the container
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
+
 #INSTALL NODE
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN apt-get install -y nodejs build-essential
 
 RUN npm install -g gulp
