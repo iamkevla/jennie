@@ -1,6 +1,6 @@
 
 #JENKINS
-FROM jenkins
+FROM jenkins/jenkins
 MAINTAINER Kevin Vlahos <kevin.vlahos@gmail.com>
 USER root
 
