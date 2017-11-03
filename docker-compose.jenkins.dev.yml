@@ -1,0 +1,30 @@
+# It is recommended to use a separate container for data volumes.
+# This provides some benefits, for e.g., the db container can be upgraded without affecting the data
+
+jenkins_home:
+  image: jenkins
+  volumes:
+    - /var/jenkins_home
+  command: echo Data Volume for jenkins
+
+
+#jenkins:
+#  image: collinestes/jenkins-nodejs
+#  ports:
+#    - "8081:8080"
+#  volumes_from:
+#    - jenkins_home
+#  restart: always
+
+jenkins:
+  image: kevla/jenkins
+  ports:
+    - "8081:8080"
+  volumes:
+    - "/usr/bin/docker:/bin/docker.io"
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "/usr/lib/x86_64-linux-gnu/libapparmor.so.1.1.0:/usr/lib/x86_64-linux-gnu/libapparmor.so.1"
+  volumes_from:
+    - jenkins_home
+  restart: always
+
