@@ -47,6 +47,10 @@ docker run -d --name pci_jenkins_1 \
 
 # hadar
 
+
+# copy image to production
+docker save kevla/jenkins | ssh -C prod@hadar.vivcourt.com 'docker load'
+
   docker run -d --name pci_jenkins_1 \
   --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
