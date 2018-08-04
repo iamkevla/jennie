@@ -59,6 +59,6 @@ docker save kevla/jenkins | ssh -C prod@hadar.vivcourt.com 'docker load'
 docker run -d --name pci_jenkins_1 \
   --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /usr/bin/docker:/usr/bin/docker \
+  -v /var/lib/docker/:/var/lib/docker/ \
   -v pci_jenkins_home_1:/var/jenkins_home \
   -p 8081:8080 kevla/jenkins
