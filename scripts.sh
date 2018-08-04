@@ -20,6 +20,12 @@ docker save kevla/jenkins | ssh -C prod@docker.vivcourt.com 'docker load'
 ssh prod@docker
 
 
+# copy image to hadar
+docker save kevla/jenkins | ssh -C prod@hadar.vivcourt.com 'docker load'
+
+ssh prod@hadar
+
+
 ## works for mac
 docker run -d --name pci_jenkins_1 \
   --privileged \
@@ -50,11 +56,11 @@ docker run -d --name pci_jenkins_1 \
   -p 8081:8080 kevla/jenkins
 
 
-# hadar
+#deploy hadar
 
+docker stop pci_jenkins_1
 
-# copy image to production
-docker save kevla/jenkins | ssh -C prod@hadar.vivcourt.com 'docker load'
+docker rm pci_jenkins_1
 
 docker run -d --name pci_jenkins_1 \
   --privileged \
