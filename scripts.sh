@@ -53,6 +53,7 @@ docker run -d --name pci_jenkins_1 \
   -v /lib/x86_64-linux-gnu/libnih.so.1:/lib/x86_64-linux-gnu/libnih.so.1 \
   -v /lib/x86_64-linux-gnu/libnih-dbus.so.1:/lib/x86_64-linux-gnu/libnih-dbus.so.1 \
   --volumes-from pci_jenkins_home_1 \
+  --link pci_rdb1_1:rdb1 \
   -p 8081:8080 kevla/jenkins
 
 
