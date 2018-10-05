@@ -46,7 +46,7 @@ docker run -d --name pci_jenkins_1 \
   --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /usr/bin/docker:/usr/bin/docker \
-  -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime \
+  -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro \
   -v /usr/lib/x86_64-linux-gnu/libapparmor.so.1:/usr/lib/x86_64-linux-gnu/libapparmor.so.1 \
   -v /lib/x86_64-linux-gnu/libsystemd-journal.so.0:/lib/x86_64-linux-gnu/libsystemd-journal.so.0 \
   -v /lib/x86_64-linux-gnu/libcgmanager.so.0:/lib/x86_64-linux-gnu/libcgmanager.so.0 \
