@@ -1,6 +1,6 @@
 
 #build
-docker pull jenkins/jenkins:lts
+docker pull jenkins/jenkins
 
 ## build data volume
 docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins /bin/true
@@ -57,15 +57,3 @@ docker run -d --name pci_jenkins_1 \
   -p 8081:8080 kevla/jenkins
 
 
-#deploy hadar
-
-docker stop pci_jenkins_1
-
-docker rm pci_jenkins_1
-
-docker run -d --name pci_jenkins_1 \
-  --privileged \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /var/lib/docker/:/var/lib/docker/ \
-  -v pci_jenkins_home_1:/var/jenkins_home \
-  -p 8081:8080 kevla/jenkins
