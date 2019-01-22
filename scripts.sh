@@ -1,6 +1,6 @@
 
 #build
-docker pull jenkins/jenkins
+docker pull jenkins/jenkins:lts
 
 ## build data volume
 docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins /bin/true
@@ -52,8 +52,7 @@ docker run -d --name pci_jenkins_1 \
   -v /lib/x86_64-linux-gnu/libcgmanager.so.0:/lib/x86_64-linux-gnu/libcgmanager.so.0 \
   -v /lib/x86_64-linux-gnu/libnih.so.1:/lib/x86_64-linux-gnu/libnih.so.1 \
   -v /lib/x86_64-linux-gnu/libnih-dbus.so.1:/lib/x86_64-linux-gnu/libnih-dbus.so.1 \
+  -v /lib/x86_64-linux-gnu/libdevmapper.so.1.02.1:/lib/x86_64-linux-gnu/libdevmapper.so.1.02.1 \
   --volumes-from pci_jenkins_home_1 \
   --link pci_rdb1_1:rdb1 \
   -p 8081:8080 kevla/jenkins
-
-
