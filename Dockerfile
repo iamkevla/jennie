@@ -1,7 +1,7 @@
 
 #JENKINS
-FROM jenkins/jenkins:2.150.3
-MAINTAINER Kevin Vlahos <kevin.vlahos@gmail.com>
+FROM jenkins/jenkins
+LABEL maintainer="Kevin Vlahos <kevin.vlahos@gmail.com>"
 USER root
 
 
@@ -18,14 +18,7 @@ RUN echo "Australia/Sydney" > /etc/timezone \
  && dpkg-reconfigure --frontend=noninteractive tzdata
  
 # Install docker-engine
-# According to Petazzoni's article:
-# ---------------------------------
-# "Former versions of this post advised to bind-mount the docker binary from
-# the host to the container. This is not reliable anymore, because the Docker
-# Engine is no longer distributed as (almost) static libraries."
-## RUN curl -sSL https://get.docker.com/ | sh
-
-USER root
+# this version of docker is that same as what is on dockerprod and dockerdev
 
 RUN apt-get update -qq \
     && apt-get install -qqy apt-transport-https ca-certificates gnupg2 software-properties-common 
@@ -43,7 +36,6 @@ RUN usermod -aG docker jenkins
 #
 # supervisord
 #
-USER root
 
 # Create log folder for supervisor and jenkins
 RUN mkdir -p /var/log/supervisor
