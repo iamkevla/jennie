@@ -1,6 +1,6 @@
 
 #JENKINS
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:2.150.3
 MAINTAINER Kevin Vlahos <kevin.vlahos@gmail.com>
 USER root
 
@@ -23,7 +23,19 @@ RUN echo "Australia/Sydney" > /etc/timezone \
 # "Former versions of this post advised to bind-mount the docker binary from
 # the host to the container. This is not reliable anymore, because the Docker
 # Engine is no longer distributed as (almost) static libraries."
-RUN curl -sSL https://get.docker.com/ | sh
+## RUN curl -sSL https://get.docker.com/ | sh
+
+USER root
+
+RUN apt-get update -qq \
+    && apt-get install -qqy apt-transport-https ca-certificates gnupg2 software-properties-common 
+RUN curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
+RUN apt-add-repository "deb https://apt.dockerproject.org/repo ubuntu-trusty main"
+RUN apt-get update  -qq \
+    && apt-cache policy docker-engine \
+    && sudo apt-get install docker-engine=1.9.1-0~trusty -y
+
+
 
 # Make sure jenkins user has docker privileges
 RUN usermod -aG docker jenkins 
