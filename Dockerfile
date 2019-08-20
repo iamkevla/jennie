@@ -1,6 +1,6 @@
 
 #JENKINS
-FROM jenkins/jenkins
+FROM jenkins/jenkins:lts
 LABEL maintainer="Kevin Vlahos <kevin.vlahos@gmail.com>"
 USER root
 

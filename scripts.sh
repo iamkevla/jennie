@@ -1,6 +1,6 @@
 
 #build
-docker pull jenkins/jenkins:2.176.2
+docker pull jenkins/jenkins:lts
 
 ## build data volume
 docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins /bin/true
