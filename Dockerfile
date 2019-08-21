@@ -1,6 +1,6 @@
 
 #JENKINS
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:latest
 LABEL maintainer="Kevin Vlahos <kevin.vlahos@gmail.com>"
 USER root
 
@@ -52,4 +52,4 @@ CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs build-essential
 
-RUN npm install -g gulp-cli
+RUN npm install -g gulp-cli@2.0.1
