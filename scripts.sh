@@ -3,7 +3,7 @@
 docker pull jenkins/jenkins:lts
 
 ## build data volume
-docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins /bin/true
+docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins/jenkins /bin/true
 
 
 ##build
@@ -26,13 +26,17 @@ docker save kevla/jenkins | ssh -C prod@hadar.vivcourt.com 'docker load'
 ssh prod@hadar
 
 
-## works for mac
+## local works for mac
 docker run -d --name pci_jenkins_1 \
   --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /usr/bin/docker:/usr/bin/docker \
   -e JAVA_OPTS="-Duser.timezone=Australia/Sydney" \
   --volumes-from pci_jenkins_home_1 \
+  -p 8081:8080 kevla/jenkins
+
+## local windows
+  docker run -d --name pci_jenkins_1 \
   -p 8081:8080 kevla/jenkins
 
 
