@@ -2,8 +2,11 @@
 docker create -v /var/jenkins_home --name pci_jenkins_home_1 jenkins/jenkins /bin/true
 
 ## backup volume
-docker run -it --volumes-from pci_jenkins_home_1:ro -v ~/backup:/backup alpine \
-    tar -cjf /backup/pci_jenkins_archive.tar.bz2 -C /var/jenkins_home ./
+##docker run -it --volumes-from pci_jenkins_home_1:ro -v ~/backup:/backup alpine \
+##    tar -cjf /backup/pci_jenkins_archive.tar.bz2 -C /var/jenkins_home ./
+
+docker run -it --volumes-from pci_jenkins_home_1:ro -v ~/backup:/backup nyaa/docker-pbzip2 \
+    tar -cf /backup/pci_jenkins_archive.tar.bz2 --use-compress-prog=pbzip2 -C /var/jenkins_home ./
 
 docker stop pci_jenkins_1
 
