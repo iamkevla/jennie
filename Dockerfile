@@ -21,12 +21,11 @@ RUN echo "Australia/Sydney" > /etc/timezone \
 # this version of docker is that same as what is on dockerprod and dockerdev
 
 RUN apt-get update -qq \
-    && apt-get install -qqy apt-transport-https ca-certificates gnupg2 software-properties-common 
-RUN curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
-RUN apt-add-repository "deb https://apt.dockerproject.org/repo ubuntu-trusty main"
+    && apt-get install apt-transport-https ca-certificates gnupg-agent software-properties-common -y
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
 RUN apt-get update  -qq \
-    && apt-cache policy docker-engine \
-    && sudo apt-get install docker-engine=1.9.1-0~trusty -y
+    && apt-get install docker-ce=18.03.0~ce-0~ubuntu -yq
 
 
 

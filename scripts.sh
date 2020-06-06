@@ -60,3 +60,11 @@ docker run -d --name pci_jenkins_1 \
   --volumes-from pci_jenkins_home_1 \
   --link pci_rdb1_1:rdb1 \
   -p 8081:8080 kevla/jenkins
+
+
+## example docker in docker image online for investigation
+  docker run -d --name pci_jenkins_1 -p 8081:8080  \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --restart unless-stopped \
+    --volumes-from pci_jenkins_home_1 \
+    4oh4/jenkins-docker
