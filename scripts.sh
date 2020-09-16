@@ -36,6 +36,8 @@ docker run -d --name pci_jenkins_1 \
 
 ## local windows
   docker run -d --name pci_jenkins_1 \
+  --privileged \
+  --volumes-from pci_jenkins_home_1 \
   -p 8081:8080 kevla/jenkins
 
 
