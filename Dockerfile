@@ -22,10 +22,18 @@ RUN echo "Australia/Sydney" > /etc/timezone \
 
 RUN apt-get update -qq \
     && apt-get install apt-transport-https ca-certificates gnupg-agent software-properties-common -y
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
-RUN apt-get update  -qq \
-    && apt-get install docker-ce=18.03.0~ce-0~ubuntu -yq
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   xenial \
+   stable"
+   
+# Install Docker from Docker Inc. repositories.
+RUN apt-get update -qq 
+# RUN apt-cache madison docker-ce
+RUN apt-get install -qqy docker-ce=18.06.3~ce~3-0~ubuntu
+RUN rm -rf /var/lib/apt/lists/*
+
 
 
 
