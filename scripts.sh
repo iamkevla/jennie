@@ -74,7 +74,9 @@ docker rm pci_jenkins_1
 docker run -d --name pci_jenkins_1 \
   --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /usr/bin/docker:/usr/bin/docker \
   -v pci_jenkins_home_1:/var/jenkins_home \
+  -v /etc/localtime:/etc/localtime:ro \
   -p 8081:8080 kevla/jenkins
 
 
